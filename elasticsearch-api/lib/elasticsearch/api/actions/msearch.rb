@@ -39,7 +39,7 @@ module Elasticsearch
         raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]
 
         method = arguments.fetch(:http_method, HTTP_GET)
-        raise ArgumentError, "Required argument 'body' missing" unless [HTTP_GET, HTTP_POST].include?(method)
+        raise ArgumentError, 'Wrong http method' unless [HTTP_GET, HTTP_POST].include?(method)
 
         valid_params = [
           :search_type,
