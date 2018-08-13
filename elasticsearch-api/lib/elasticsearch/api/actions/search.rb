@@ -126,6 +126,9 @@ module Elasticsearch
       # @see http://www.elasticsearch.org/guide/reference/api/search/request-body/
       #
       def search(arguments={})
+        method = arguments.fetch(:http_method, HTTP_GET)
+        raise ArgumentError, "Required argument 'body' missing" unless [HTTP_GET, HTTP_POST].include?(method)
+
         arguments[:index] = UNDERSCORE_ALL if ! arguments[:index] && arguments[:type]
 
         valid_params = [

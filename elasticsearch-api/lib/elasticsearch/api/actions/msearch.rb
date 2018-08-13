@@ -38,7 +38,10 @@ module Elasticsearch
       def msearch(arguments={})
         raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]
 
-         valid_params = [
+        method = arguments.fetch(:http_method, HTTP_GET)
+        raise ArgumentError, "Required argument 'body' missing" unless [HTTP_GET, HTTP_POST].include?(method)
+
+        valid_params = [
           :search_type,
           :max_concurrent_searches,
           :typed_keys ]
